@@ -2,7 +2,7 @@
     // $countries set in countries.php
     require "./countries.php";
 
-    // $country, $postcode, $iconClass and $err all set in form-action.php
+    // $country, $postcode, $iconClass, $conditions and $err all set in form-action.php
     require "./form-action.php";
 ?>
 <!DOCTYPE html>
@@ -51,7 +51,10 @@
     </form>
     <?php if (!empty($iconClass)) : ?>
         <h1>Current Weather:</h1>
-        <p id="result"><i class="wi <?= $iconClass ?>"></i></p>
+        <p id="result">
+            <i class="wi <?= $iconClass ?>"></i>
+            <br><b>Conditions:</b> <i><?= $conditions ?></i>
+        </p>
     <?php endif; ?>
     <p><small>Powered by the <a href="https://developer.weathersource.com/">OnPoint API</a> and <a href="https://erikflowers.github.io/weather-icons/">Weather Icons</a>. Source code is vailable at <a href="https://github.com/weathersource/weather-icon-demo">Github</a>.</small></p>
 </body>

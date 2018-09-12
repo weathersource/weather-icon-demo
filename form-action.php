@@ -18,8 +18,9 @@
     }
 
     // if lat/lng provided, retrieve current weather from Weather Source API
-    $err       = "";
-    $iconClass = "";
+    $err        = "";
+    $iconClass  = "";
+    $conditions = "";
     if (!empty($country) && !empty($postcode) && !empty($apiKey)) {
 
         $timestamp   = gmdate('c'); // Use the current ISO 8601 timestamp for lookup.
@@ -42,7 +43,8 @@
             if (is_string($astro)) {
                 $err = $astro;
             } else {
-                $iconClass = getIconClass($wx, $astro, $timestamp);
+                $iconClass  = getIconClass($wx, $astro, $timestamp);
+                $conditions = ucfirst(getClouds($wx) . ", " . getPrecip($wx) . ", " . getWind($wx) . ", " . getDayPhase($astro, $timestamp) . ".");
             }
         }
     }
