@@ -250,9 +250,9 @@ function getClouds($weatherResp) {
     $clouds = "";
     $cldCvr = $weatherResp['cldCvr'];
 
-    if (25 < $cldCvr && $cldCvr <= 75) {
+    if (25 < $cldCvr && $cldCvr <= 50) {
         $clouds = "partly cloudy";
-    } elseif (75 < $cldCvr) {
+    } elseif (50 < $cldCvr) {
         $clouds = "cloudy";
     }
 
