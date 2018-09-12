@@ -27,6 +27,7 @@
         $countryEnc  = rawurlencode($country);
         $postcodeEnc = rawurlencode($postcode);
 
+        // NOTE: we could use the nowcast resource, but then we would not get a magnitude for precipation, only a precip flag. Having a magnitude (i.e. inches per hour), allows us to be more descriptive with the icons.
         $historyUrl   = "https://api.weathersource.com/v1/{$apiKey}/postal_codes/{$postcodeEnc},{$countryEnc}/history.json?timestamp_eq={$timestamp}&period=hour";
         $astronomyUrl = "https://api.weathersource.com/v1/{$apiKey}/postal_codes/{$postcodeEnc},{$countryEnc}/astronomy.json?timestamp_eq={$timestamp}&period=day";
 
