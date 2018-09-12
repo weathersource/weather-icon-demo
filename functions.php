@@ -109,26 +109,47 @@ function getIconClass($weatherResp, $astroResp = null, $timestamp = null) {
                     }
                 }
             }
-        } elseif ($clouds === "partly cloudy" || $clouds === "cloudy") {
+        } elseif ($clouds === "scattered clouds") {
+            // use icons that have a small cloud, if available, otherwise, use cloudless icons
             if ($wind === "" || $wind === "light winds") {
                 if ($isNight === true) {
-                    if ($clouds === "partly cloudy") {
-                        $clas = "wi-night-alt-partly-cloudy";
-                    } elseif ($clouds === "cloudy") {
-                        $clas = "wi-night-alt-cloudy";
-                    }
+                    $clas = "wi-night-alt-partly-cloudy";
                 } elseif ($isNight === false) {
-                    if ($clouds === "partly cloudy") {
-                        $clas = "wi-day-sunny-overcast";
-                    } elseif ($clouds === "cloudy") {
-                        $clas = "wi-day-cloudy";
-                    }
+                    $clas = "wi-day-sunny-overcast";
                 } elseif ($isNight === null) {
-                    if ($clouds === "partly cloudy") {
-                        $clas = "wi-cloud";
-                    } elseif ($clouds === "cloudy") {
-                        $clas = "wi-cloudy";
-                    }
+                    // There is not a good small cloud neutral option, so go with clear skies
+                    $clas = "wi-day-sunny";
+                }
+            } elseif ($wind === "winds") {
+                // There is not a good small cloud wind option, so go with clear skies
+                if ($isNight === true) {
+                    // this should be "wi-night-light-wind", but this icon is missing
+                    $clas = "wi-windy";
+                } elseif ($isNight === false) {
+                    $clas = "wi-day-light-wind";
+                } elseif ($isNight === null) {
+                    $clas = "wi-windy";
+                }
+            } elseif ($wind === "strong winds") {
+                // There is not a good small cloud wind option, so go with clear skies
+                if ($isNight === true) {
+                    // this should be "wi-night-windy", but this icon is missing
+                    $clas = "wi-strong-wind";
+                } elseif ($isNight === false) {
+                    $clas = "wi-day-windy";
+                } elseif ($isNight === null) {
+                    $clas = "wi-strong-wind";
+                }
+            }
+        } elseif ($clouds === "partly cloudy") {
+            // use icons with a single large cloud, with a sun/moon in the frame, if available.
+            if ($wind === "" || $wind === "light winds") {
+                if ($isNight === true) {
+                    $clas = "wi-night-alt-cloudy";
+                } elseif ($isNight === false) {
+                    $clas = "wi-day-cloudy";
+                } elseif ($isNight === null) {
+                    $clas = "wi-cloud";
                 }
             } elseif ($wind === "winds") {
                 if ($isNight === true) {
@@ -147,12 +168,21 @@ function getIconClass($weatherResp, $astroResp = null, $timestamp = null) {
                     $clas = "wi-cloudy-gusts";
                 }
             }
+        } elseif ($clouds === "cloudy") {
+            // use neutral icon (i.e. no sun or moon in sky)
+            if ($wind === "" || $wind === "light winds") {
+                $clas = "wi-cloudy";
+            } elseif ($wind === "winds") {
+                $clas = "wi-cloudy-windy";
+            } elseif ($wind === "strong winds") {
+                $clas = "wi-cloudy-gusts";
+            }
         }
     } elseif (in_array($precip, array("snow", "sprinkles", "light rain", "rain", "showers"))) {
         // There are only meaningful wind icons for non-precipitation, so wind is not considered here
 
-        // if it is cloudy, use neutral icon (i.e. no sun or moon in sky)
         if ($clouds === "cloudy") {
+            // use neutral icon (i.e. no sun or moon in sky)
             if ($precip === "snow") {
                 $clas = "wi-snow";
             } elseif ($precip === "sprinkles" || $precip === "light rain") {
@@ -165,6 +195,7 @@ function getIconClass($weatherResp, $astroResp = null, $timestamp = null) {
                 $clas = "wi-rain";
             }
         } else {
+            // use icon with a sun/moon in the frame, if available.
             if ($isNight === true) {
                 if ($precip === "snow") {
                     $clas = "wi-night-alt-snow";
@@ -251,8 +282,10 @@ function getClouds($weatherResp) {
     $cldCvr = $weatherResp['cldCvr'];
 
     if (25 < $cldCvr && $cldCvr <= 50) {
+        $clouds = "scattered clouds";
+    } elseif (50 < $cldCvr && $cldCvr <= 75) {
         $clouds = "partly cloudy";
-    } elseif (50 < $cldCvr) {
+    } elseif (75 < $cldCvr) {
         $clouds = "cloudy";
     }
 
