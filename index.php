@@ -18,7 +18,7 @@
             text-align: center;
         }
         .wi {
-            color: darkblue;
+            color: #924da3;
             font-size: 250px;
         }
     </style>
