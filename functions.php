@@ -382,7 +382,9 @@ function getClouds($weatherResp) {
 
     // percentage breakdown from "Sky Condition" definition at http://w1.weather.gov/glossary/
     $clouds = "clear";
-    if (12.5 < $cldCvr && $cldCvr <= 25) {
+    if (0 < $cldCvr && $cldCvr <= 25) {
+        // the standard has the minimum value at 12.5%. Fudge it down to 0 to avoid the description
+        // that says:" Clear, light rain."
         $clouds = "mostly clear";
     } elseif (25 < $cldCvr && $cldCvr <= 37.5) {
         $clouds = "partly cloudy";
