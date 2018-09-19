@@ -56,7 +56,7 @@
             <br><b>Conditions:</b> <i><?= $conditions ?></i>
         </p>
     <?php endif; ?>
-    <p><small>Powered by the <a href="https://developer.weathersource.com/">OnPoint API</a> and <a href="https://erikflowers.github.io/weather-icons/">Weather Icons</a>. Source code is vailable at <a href="https://github.com/weathersource/weather-icon-demo">Github</a>.</small></p>
+    <p><small>Powered by the <a href="https://developer.weathersource.com/">OnPoint API</a>. Features <a href="https://erikflowers.github.io/weather-icons/">Weather Icons</a>. Source code is available at <a href="https://github.com/weathersource/weather-icon-demo">Github</a>.</small></p>
 </body>
 </html>
 
