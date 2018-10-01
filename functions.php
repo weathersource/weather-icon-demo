@@ -386,9 +386,9 @@ function getClouds($weatherResp) {
         // the standard has the minimum value at 12.5%. Fudge it down to 0 to avoid the description
         // that says:" Clear, light rain."
         $clouds = "mostly clear";
-    } elseif (25 < $cldCvr && $cldCvr <= 37.5) {
+    } elseif (25 < $cldCvr && $cldCvr <= 50) {
         $clouds = "partly cloudy";
-    } elseif (37.5 < $cldCvr && $cldCvr <= 87.5) {
+    } elseif (50 < $cldCvr && $cldCvr <= 87.5) {
         $clouds = "mostly cloudy";
     } elseif (87.5 < $cldCvr) {
         $clouds = "cloudy";
